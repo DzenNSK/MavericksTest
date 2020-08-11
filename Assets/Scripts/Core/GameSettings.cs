@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Game settings storage
 [CreateAssetMenu(fileName = "GameSettings", menuName = "TestGame/Game settings")]
 public class GameSettings : ScriptableObject
 {

@@ -88,6 +88,8 @@ public class GameController : SingletonBehavior<GameController>
     public void OnLevelWin()
     {
         if (currentLevelIndex == finishedLevels) finishedLevels++;
+        PlayerPrefs.SetInt("finishedLevels", finishedLevels);
+        PlayerPrefs.Save();
         currentLevelIndex++;
         GameState = GameStates.Win;
     }
@@ -111,8 +113,13 @@ public class GameController : SingletonBehavior<GameController>
     {
         LevelController.Instance.onLevelWin.AddListener(OnLevelWin);
         LevelController.Instance.onLevelLose.AddListener(OnLeveLose);
+
         CurrentGameSettings = Resources.Load<GameSettings>("DefaultSettings");
+
         campaignDescriptor = Resources.Load<CampaignDescriptor>("LevelData/DefaultCampaign");
+
+        finishedLevels = PlayerPrefs.GetInt("finishedLevels");
+
         GameState = GameStates.Menu;
         OnGameStateChange.Invoke();
     }
